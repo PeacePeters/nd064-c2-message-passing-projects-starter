@@ -31,7 +31,7 @@ spec:
         service: person
     spec:
       containers:
-      - image: agilestrategist/person-api:1.0.0
+      - image: agilestrategist/person-api:latest
         name: person
         imagePullPolicy: Always
         env:
