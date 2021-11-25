@@ -9,4 +9,4 @@ EXPOSE 5007
 
 COPY . .
 
-ENTRYPOINT [ "python", "app/connect.py" ]
+CMD ["python", "connect.py"]
