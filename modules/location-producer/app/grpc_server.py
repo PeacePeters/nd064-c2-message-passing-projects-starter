@@ -1,15 +1,21 @@
 from concurrent import futures
 import grpc
+import time
+import json
+import os
 import location_pb2
 import location_pb2_grpc
 from kafka import KafkaProducer
-import json
 
 
-kafka_url = "kafka-service:9092"
-kafka_topic = "locations"
+kafka_url = os.environ["KAFKA_URL"]
+kafka_topic = os.environ["KAFKA_TOPIC"]
 kafka_producer = KafkaProducer(bootstrap_servers=kafka_url)
 class LocationServicer(location_pb2_grpc.LocationServiceServicer):
+
+    def __init__(self, *args, **kwargs):
+        pass
+
     def Create(self, request, context):
 
         request_value = {
@@ -18,17 +24,18 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
             "longitude": float(request.longitude)
         }
 
-        kafka_request = json.dumps(request_value).encode()
+        kafka_request = json.dumps(request_value, indent=2).encode('utf-8')
         kafka_producer.send(kafka_topic, kafka_request)
         kafka_producer.flush()
         return location_pb2.LocationMessage(**request_value)
 
-server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
+    location_pb2_grpc.add_LocationServiceServicer_to_server(LocationServicer(), server)
+    server.add_insecure_port('[::]:5007')
+    server.start()
+    server.wait_for_termination()
 
-location_pb2_grpc.add_LocationServiceServicer_to_server(
-    LocationServicer(), server
-)
 
-server.add_insecure_port("[::]:5008")
-server.start()
-server.wait_for_termination()
+if __name__ == '__main__':
+    serve()

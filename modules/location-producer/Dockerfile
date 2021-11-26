@@ -1,15 +1,14 @@
 FROM python:3.8
 
 WORKDIR .
+COPY . .
 
-ENV GRPC_TRACE 'transport_security,tsi'
-ENV GRPC_VERBOSITY 'DEBUG'
-
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN python -m pip install --upgrade pip
+RUN python -m pip install -r requirements.txt
+RUN python -m grpc_tools.protoc -Iapp --python_out=. --grpc_python_out=. app/location.proto
+ENV KAFKA_URL =  kafka-service:9092
+ENV KAFKA_TOPIC = locations
 
 EXPOSE 5007
 
-COPY . .
-
-ENTRYPOINT [ "python", "app/grpc_host.py" ]
+CMD [ "python", "app/grpc_server.py" ]
