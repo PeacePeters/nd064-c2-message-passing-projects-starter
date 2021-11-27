@@ -23,6 +23,7 @@ class LocationServicer(location_pb2_grpc.LocationServiceServicer):
             "latitude": float(request.latitude),
             "longitude": float(request.longitude)
         }
+        print(f'Location created - gRPC:  {request_value}')
 
         kafka_request = json.dumps(request_value, indent=2).encode('utf-8')
         kafka_producer.send(kafka_topic, kafka_request)

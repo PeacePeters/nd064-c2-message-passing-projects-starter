@@ -4,7 +4,7 @@ import os
 import json
 
 kafka_topic = "locations"
-print('started listening ' + kafka_topic)
+print('Started listening ' + kafka_topic)
 
 DB_USERNAME = os.environ["DB_USERNAME"]
 DB_PASSWORD = os.environ["DB_PASSWORD"]
