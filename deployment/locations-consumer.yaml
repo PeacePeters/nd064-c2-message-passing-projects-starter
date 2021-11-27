@@ -62,12 +62,12 @@ spec:
             - name: KAFKA_URL
               valueFrom:
                 configMapKeyRef:
-                  name: db-event-configmap
+                  name: kafka-env
                   key: KAFKA_URL
             - name: KAFKA_TOPIC
               valueFrom:
                 configMapKeyRef:
-                  name: db-event-configmap
+                  name: kafka-env
                   key: KAFKA_TOPIC
             - name: PYTHONUNBUFFERED
               value: '0'

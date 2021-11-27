@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  PERSONS_API_SRV: "localhost:30001"
+  CONNECTIONS_API_SRV: "localhost:30002"
+metadata:
+  name: fe-env
