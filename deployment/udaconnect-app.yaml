@@ -6,10 +6,10 @@ metadata:
   name: udaconnect-app
 spec:
   ports:
-  - name: "3000"
-    port: 3000
-    targetPort: 3000
-    nodePort: 30000
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000
   selector:
     service: udaconnect-app
   type: NodePort
@@ -31,21 +31,10 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-      - image: agilestrategist/udaconnect-app:latest
-        name: udaconnect-app
-        iimagePullPolicy: Always
-        env:
-        - name: PERSONS_API_SRV
-          valueFrom:
-            configMapKeyRef:
-              name: fe-env
-              key: PERSONS_API_SRV
-        - name: CONNECTIONS_API_SRV
-          valueFrom:
-            configMapKeyRef:
-              name: fe-env
-              key: CONNECTIONS_API_SRV
-        resources:
+        - image: themultitoolguy/udaconnectfrontend:latest
+          name: udaconnect-app
+          imagePullPolicy: Always
+          resources:
             requests:
               memory: "128Mi"
               cpu: "64m"

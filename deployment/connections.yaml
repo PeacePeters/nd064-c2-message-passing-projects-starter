@@ -8,7 +8,7 @@ spec:
   ports:
   - name: "5005"
     port: 5005
-    targetPort: 5005
+    targetPort: 5000
     nodePort: 30002
   selector:
     service: connections
