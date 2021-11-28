@@ -7,7 +7,7 @@ It is a RESTFul API service since it does not need scaling at this time due to c
 
 2. Connection Service
 
-The connection service finds people that one may find intreresting by combining People and Location Data to build Connection.
+The connection service finds people that one may find intereresting by combining People and Location Data to build Connection.
 It gets data from Person service through RESTFul API.
 
 3. Location Producer Service
