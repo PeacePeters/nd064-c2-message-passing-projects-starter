@@ -21,6 +21,4 @@ location2 = location_pb2.LocationMessage(
 
 response1 = stub.Create(location1)
 response2 = stub.Create(location2)
-
-print("Sent user location")
 print(location1, location2)
