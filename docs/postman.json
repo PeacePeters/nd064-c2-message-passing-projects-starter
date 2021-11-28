@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "12e75bfd-5865-4f9a-a73e-356fa708b2a0",
+		"name": "UdaConnect",
+		"description": "This is a collection of REST API endpoints for Persons and Connections services.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/persons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{per_url}}/api/persons",
+					"host": [
+						"{{per_url}}"
+					],
+					"path": [
+						"api",
+						"persons"
+					]
+				},
+				"description": "Returns all persons"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 18,\n    \"first_name\": \"Magdalene\",\n    \"last_name\": \"Sacdev\",\n    \"company_name\": \"Chevron Corporation\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{per_url}}/api/persons",
+					"host": [
+						"{{per_url}}"
+					],
+					"path": [
+						"api",
+						"persons"
+					]
+				},
+				"description": "Adds a person to the system"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/{person_id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{per_url}}/api/persons/{{person_id}}",
+					"host": [
+						"{{per_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"{{person_id}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Returns person by id"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/persons/{person_id}/connection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{con_url}}/api/persons/{{person_id}}/connection?distance=4&end_date=2020-12-30&start_date=2020-01-01",
+					"host": [
+						"{{con_url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						"{{person_id}}",
+						"connection"
+					],
+					"query": [
+						{
+							"key": "distance",
+							"value": "4"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-12-30"
+						},
+						{
+							"key": "start_date",
+							"value": "2020-01-01"
+						}
+					]
+				},
+				"description": "Returns all connections that match criteria for specified person"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  description: API for interacting with Persons from UdaConnect application
+  version: "1.0.0"
+  title: Connections API
+paths:
+  /persons/{personId}/connection:
+    get:
+      summary:  Returns all connections
+      operationId: getConnection
+      description: |
+        Returns all connections that match criteria for specified person
+      parameters:
+        - in: path
+          name: personId
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the person to get
+        - in: query
+          name: start_date
+          description: start date
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - in: query
+          name: end_date
+          description: end date
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - in: query
+          name: distance
+          description: distance
+          schema:
+            type: string
+            format: integer
+      responses:
+        '200':
+          description: Successfully retrieved all matched connections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectionSchema'
+        '400':
+          description: 'Invalid input, object invalid'
+components:
+  schemas:
+    PersonSchema:
+      type: object
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: integer
+          example: 5
+        first_name:
+          type: string
+          example: James
+        last_name:
+          type: string
+          example: Brenda
+        company_name:
+          type: string
+          example: Amazon
+    ConnectionSchema:
+      type: object
+      required:
+        - location
+        - person
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationSchema'
+        person:
+          $ref: '#/components/schemas/PersonSchema'

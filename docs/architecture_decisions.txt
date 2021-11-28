@@ -1,0 +1,27 @@
+The monolith application is refactored into a microservice architecture of five services using three message passing techniques -  REST API, gRPC and Distributed Message Queuing via Apache Kafka. The services are as follows:
+
+1. Person Service
+
+Person service is responsible for creating new perons and retrieving all persons. 
+It is a RESTFul API service since it does not need scaling at this time due to cost and mvp scope limitations. 
+
+2. Connection Service
+
+The connection service finds people that one may find intreresting by combining People and Location Data to build Connection.
+It gets data from Person service through RESTFul API.
+
+3. Location Producer Service
+
+Location Producer Service ingest location data sent from mobiles devices via gRPC. 
+I chose gRPC and KAFKA in order to scale up with the anticipated high volume of location data sent and to utilize the efficiency and privacy of the binary protocol.
+Location Producer service acts as kafka producer that accepts and sends location data to KAFKA queue in a scalable way that shields the db from locking.
+
+4. Location Consumer Service
+
+The Location Consumer service act as a kafka consumer designed to subscribe and consume the location topic on the KAFKA queue. 
+On receiving the messages, the Location Consumer will persist location data in postgres database.
+
+5. Frontend  
+
+It is the user interface service where the end users interact with the UdaConnect App.
+It requires a mobile / web ui.

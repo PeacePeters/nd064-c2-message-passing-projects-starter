@@ -1,0 +1,32 @@
+## gRPC Documentation
+
+location-producer service provides gRPC API with a Protobuf message definition and rpr service.
+
+### Message format and service 
+
+```
+syntax = "proto3";
+
+message LocationMessage {
+  int32 person_id = 1;
+  float latitude = 2;
+  float longitude = 3;
+}
+
+service LocationService {
+    rpc Create(LocationMessage) returns (LocationMessage);
+}
+```
+
+### Sample request
+
+Sample request is provided in modules/location-producer/app/grpc_client.py script.
+Run the following command to make a sample request:
+
+1. kubectl get pods
+2. kubectl exec -it location-producer-[POD_ID] bash
+3. Run the `grpc_client.py` file via python app/grpc_client.py
+
+```
+python grpc_client.py
+```
