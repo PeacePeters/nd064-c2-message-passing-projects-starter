@@ -2,7 +2,7 @@ The monolith application is refactored into a microservice architecture of five 
 
 1. Person Service
 
-Person service is responsible for creating new perons and retrieving all persons. 
+Person service is responsible for creating new persons and retrieving all persons. 
 It is a RESTFul API service since it does not need scaling at this time due to cost and mvp scope limitations. 
 
 2. Connection Service
