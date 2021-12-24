@@ -31,7 +31,7 @@ spec:
         service: udaconnect-app
     spec:
       containers:
-        - image: agilestrategist/udaconnectfrontend:latest
+        - image: agilestrategist/udaconnect-app:latest
           name: udaconnect-app
           imagePullPolicy: Always
           resources:
